@@ -10,18 +10,17 @@ Please follow the instructions below and fill in the information requested when 
 
 |               | Information   |
 |:-------------:|:-------------:|
-| Student Name  | name-here     |
-| Student ID    | id-here       |
-| Student Email | email-here    |
+| Student Name  | Yan Peng    |
+| Student ID    | 921759056      |
+| Student Email | ypeng6@sfsu.edu   |
 
 
 
 # Build/Run Instructions
 
 ## Build Instructions
-1. steps here
-2. steps here
+1. npm install
+
 
 ## Run Instructions
-1. steps here
-2. steps here 
+1. npm start
