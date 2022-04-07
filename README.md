@@ -10,9 +10,10 @@ Please follow the instructions below and fill in the information requested when 
 
 |               | Information   |
 |:-------------:|:-------------:|
-| Student Name  | Yan Peng    |
-| Student ID    | 921759056      |
-| Student Email | ypeng6@sfsu.edu   |
+| Student Name  | Yan Peng      |
+| Student ID    | 921759056     |
+| Student Email | ypeng6@sfsu.edu  |
+
 
 
 
@@ -20,7 +21,6 @@ Please follow the instructions below and fill in the information requested when 
 
 ## Build Instructions
 1. npm install
-
 
 ## Run Instructions
 1. npm start

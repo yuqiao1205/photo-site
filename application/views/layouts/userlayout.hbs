@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/public/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="/public/js/fetch.js"></script>
+</head>
+
+<body>
+    {{#if messages}}
+    {{>flashmessage}}
+    {{/if}}
+
+    {{{body}}}
+</body>
+
+{{#if logged}}
+<script>
+    let ele = document.getElementById('logout');
+    if (ele) {
+        ele.onclick = (event) => {
+            fetch('/logout', {
+                    method: "post"
+                })
+                .then((data) => {
+                    location.replace('/');
+                })
+        }
+    }
+</script>
+{{/if}}
+
+</html>

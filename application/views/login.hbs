@@ -1,0 +1,30 @@
+ <script type="text/javascript" src="/public/js/logvalidation.js"></script>
+ <div>{{errors}}</div>
+ <img src="/public/image/user.png" class="center-img" alt="userlogo" enctype="application/x-www-from-urlencoded">
+ <h1 class="title">User Login </h1>
+ <div id="submit_log" class="error"></div>
+ <form id="login" action="/users/login" method="post">
+     <div class="input-group">
+         <label for="username">Username</label>
+         <div id="username_message" class="error"></div>
+         <input class="text-input" type="text" id="username" name="username" placeholder="Enter Username"
+             value="{{username}}" required />
+     </div>
+     <div class="input-group">
+         <label for="psw">Password</label>
+         <div id="password_message" class="error"></div>
+         <input class="text-input" type="password" id="password" name="password"
+             placeholder="Enter Password (8 characters minimum)" title="Password" />
+         <div>
+             <div class="password-requirment">8 characters minimum and contain at least 1 number 1
+                 symbol 1 uppercase</div>
+         </div>
+     </div>
+     <div class="button-group">
+         <button class="button-sub" type="submit" onclick="myFunction()">Log In</button>
+     </div>
+     <div class="form-footer">
+         Need an account? <a href="registration">Sign Up</a>
+     </div>
+
+ </form>

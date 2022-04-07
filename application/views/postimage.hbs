@@ -1,0 +1,31 @@
+
+<h1 class="title">Create a Post</h1>
+<form action="#" method="post" class="contact-form">
+
+    <div class="input-group">
+        <label for="posttitle">Title</label>
+        <input class="text-input" type="text" id="posttitle" name="posttitle" placeholder="Enter Image Title Here"
+            required>
+    </div>
+    <div>
+        <label for="description">Description</label>
+        <textarea name="description" rows="8" cols="50" placeholder="Enter Description Here" required></textarea>
+    </div>
+    <div class="input-group file-upload-group">
+        <div id="select-image">
+            <p>Select an image to upload</p>
+        </div>
+        <input type="file" id="img" name="img" required>
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" name="auserp" required>
+        <span>I agree to the&nbsp; </span> <a href="#">Acceptable
+            Use Policy</a><span>&nbsp;for uploading images.</span><br><br><br>
+
+    </div>
+    <div class="button-group">
+        <button class="button-re" type="reset">Clear</button>
+        <button class="button-sub" type="submit">Create Post</button>
+
+    </div>
+</form>
