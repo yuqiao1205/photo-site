@@ -1,13 +1,29 @@
-{{>header}}
+<div class="center">
+  <div class="viewpost-box">
+    <div class="left">
+      <img id="imagepost" src="/{{currentPost.photopath}}">
+      <div class="information">
+        <div class="image-info">Title:&nbsp&nbsp{{currentPost.title}}</div>
+        <div class="image-info">Author Name:&nbsp&nbsp{{currentPost.username}}</div>
+        <div class="image-info">Created Time:&nbsp&nbsp{{currentPost.created}}</div>
+        <div class="image-info">Description:&nbsp&nbsp{{currentPost.description}}</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="right-content">
+          <label id="comment" for="comment"><span>Comment:</span>    </label>
+          <div id="messages"> {{log this}}</div>
+          <textarea id="comment" name="comment" rows="3" cols="60" placeholder="Comment Here" required> </textarea>
+         <button class="comment-button" type="submit">Submit</button>
+     
+        {{!-- <div class="button-group"><br><br> --}}
+     
+        {{!-- </div> --}}
+        <div class="allcomment"> <p>old comment will display here</p>
+       
+        </div>
 
-
-<div class="left-area" </div> <p>This is cat world</p>
-  <p>* Author</p>
-  <p>Yan Peng</p>
-  <p>* Created Time</p>
-  <a id="signout_viewpost" href="index"><button id="mybtn">Sign Out</button></a>
-</div>
-<div class="right-post-area">
-  <div class="image-container">
+      </div>
+    </div>
   </div>
 </div>

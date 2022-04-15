@@ -21,10 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
             postDiv.innerHTML = template.replace('$url', item['url']).replace('$title', item['title']);
 
             content.appendChild(postDiv);
-
         }
     }
 
+    // Request only if the content div is defined
+    if (document.getElementById('content') !== null) {
         fetch(url, options)
             .then(response => response.json())
             .then(data => {
@@ -32,11 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateCount()
             })
             .catch(error => console.log(error));
-    
+    }
 
-    
-   
-
+    // TODO: Show count in UI
+    function updateCount() {
+    }
 
     // library of generic dom functions
     function includes(array, item) {
@@ -64,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // app specific functions
-  
 
     // post functions
     function isPost(element) {
@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateCount();
             });
         }
-
 
     }, false);
 })

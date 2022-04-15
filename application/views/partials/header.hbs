@@ -1,22 +1,31 @@
- <header>
-     <nav class="topnav">
-         <ul>
-             <li><a href="viewpost">View Post</a></li>
-             <li> <a class="active" href="/">Home</a></li>
-             <div class="logsign">
-                 {{#if logged}}
-                 <li><a id="signup" href="/postimage">+Post Image</a></li>
-                 <li><a id="comment" href="#">comment</a></li>
-                 <li><a id="logout" class="logsign1" href="/logout">Sign out</a></li>
-                 {{else}}
-                 <li><a id="signup" href="/users/registration">Sign up</a></li>
-                 <li><a class="logsign1" href="/login">Sign in</a></li>
-                 {{/if}}
-             </div>
-             <div class="search-container">
-                 <input type="text" id="searchtext" placeholder="Search..." name="search">
-                 <button class="search_button" type="submit"><i class="fa fa-search"></i></button>
-             </div>
-         </ul>
-     </nav>
- </header>
+<nav>
+    <div class="logo">
+        Image Post Application
+    </div>
+
+    <div class="nav-items">
+        <!-- The Menu items -->
+        <li><a href="/">HOME</a></li>
+        <li><a href="/postimage">+POST</a></li>
+        <li><a href="/registration">REGISTER</a></li>
+    </div>
+
+    <!-- Defining the search bars -->
+    <div class="searchbar">
+        <input  id="search-text" type="text" placeholder="Search..." name="search">
+        <button id="search-button" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+
+    <!-- Defining the login button -->
+    <div class="licon">
+        <li>
+            {{#if logged}}
+            <a id="logout" href="/logout">LOGOUT</a>
+            <i class="fa fa-user" aria-hidden="true" style="color: white"></i>
+            {{else}}
+            <a id="login" href="/login">LOGIN</a>
+            <i class="fa fa-user" aria-hidden="true" style="color: white"></i>
+            {{/if}}
+        </li>
+    </div>
+</nav>

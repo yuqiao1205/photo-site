@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>{{title}}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/public/css/style.css" type="text/css" />
-     {{!-- <script type="text/javascript" src="/public/js/logvalidation.js"></script> --}}
-    {{!-- <script type="text/javascript" src="/public/js/validation.js"></script> --}}
+    <link rel="stylesheet" href="/public/css/navbar.css" type="text/css" />
+    <script src="/public/js/frontend.js"></script>
 </head>
 
+{{#if logged}}
+<script>
+    let ele = document.getElementById('logout');
+    if (ele) {
+        ele.onclick = (event) => {
+            fetch('/logout', {
+                    method: "post"
+                })
+                .then((data) => {
+                    location.replace('/');
+                })
+        }
+    }
+</script>
+{{/if}}
+{{>header}}
+
 <body>
-    <div class="background">
-        <main>
-            <div class="wrap">
-                <div class="form">
-                    <div class="left">
-                      <img src="/public/image/boat.jpg">
-                    </div>
-                    <div class="right">
-                        <div class="right-content">
-                          {{{body}}}
-                        </div>
-                    </div> 
-                </div>
-            </div>
-        </main>
+    <h4 class="alert-login">
+        {{#if (emptyObject messages)}}
+        {{>flashmessage}}
+        {{/if}}
+    </h4>
+    <div class="container-box">
+        {{{body}}}
     </div>
 </body>
 

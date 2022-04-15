@@ -23,7 +23,7 @@ const urlencodedParser = bodyParser.urlencoded({
 //   res.send('respond with a resource');
 // });
 
-/* retister server side validation*/
+/* register server side validation*/
 router.post('/register',
   check('username', 'This username must be 3+ characters long').exists().isLength({
     min: 3,
@@ -46,15 +46,30 @@ router.post('/register',
   }) => value === req.body.password),
   (req, res) => {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
-      // res.redirect("/registration");
-      //  res.send("email already exists");
-      res.render('registration', {
-        title: 'registration',
-        errors: "might be some data is invalid or email/username already exits",
-        username: req.body.username,
-        email: req.body.email
-      });
+      const errorFormatter = ({
+        msg,
+        param
+      }) => {
+        return `Error: ${param} ${msg}`;
+      };
+
+      // TODO: Show detail server-side validation errors
+      const errorsArray = errors.formatWith(errorFormatter);
+
+      // console.log("Error: " + errors);
+      // req.flash('error', "Validation errors found!");
+      res.status(200);
+      res.redirect("/registration");
+
+      return;
+
+      // throw new UserError(
+      //   "Validation failed!  " + errors,
+      //   "/login",
+      //   200
+      // );
     };
 
     console.log(req.body);
@@ -63,7 +78,6 @@ router.post('/register',
     let email = req.body.email;
     let password = req.body.password;
     let cpassword = req.body.cpassword;
-
 
     db.execute("SELECT * FROM user WHERE username=?", [username])
       .then(([results, fields]) => {
@@ -99,22 +113,23 @@ router.post('/register',
       .then(([results, field]) => {
         if (results && results.affectedRows) {
           printers.successPrint("User.js -> User was created");
-          req.flash('success','User account has been made!');
+          req.flash('success', 'User account has been made');
           res.redirect('/login');
         } else {
           throw new UserError(
             "Server Error,user could not becreated",
             "/registration",
-            500 
+            500
           );
         }
       })
       .catch((err) => {
-        printers.errorPrint("Cannot register user due to error!", err);
+        printers.errorPrint("Cannot register user due to error!" + err);
 
         if (err instanceof UserError) {
           printers.errorPrint(err.getMessage());
-          req.flash('error',err.getMessage());
+
+          req.flash('error', err.getMessage())
           res.status(err.getStatus());
           res.redirect(err.getRedirectURL());
         } else {
@@ -124,13 +139,7 @@ router.post('/register',
       });
   });
 
-// router.get('/logout', function (req, res, next) {
-//   res.redirect('/');
-// });
-
 router.post('/login', (req, res, next) => {
-  // console.log(req.body);
-  // res.send(req.body);
 
   let username = req.body.username;
   let password = req.body.password;
@@ -144,7 +153,7 @@ router.post('/login', (req, res, next) => {
       if (results && results.length == 1) {
         let hashedPassword = results[0].password;
         userId = results[0].id;
-       
+
         return bcrypt.compare(password, hashedPassword)
 
       } else {
@@ -154,18 +163,22 @@ router.post('/login', (req, res, next) => {
     .then((passwordsMatched) => {
       if (passwordsMatched) {
         printers.successPrint(`User ${username}/${userId} is logged in`);
-       
+
         req.session.username = username;
         req.session.userid = userId;
         res.locals.logged = true;
-
         req.flash('success','You have been successfully Logged in!');
-        res.render('index', {
-          title: "Index",
-          layout: "userlayout",
-          logged: true
+        req.session.save(function (err) {
+
+          res.redirect('/');
         });
+
+        // res.render('index', {
+        //   title: "Index",
+        //   logged: true
+        // });
       } else {
+
         throw new UserError("Invalid username and/or password", "/login", 200);
       }
     })
@@ -175,14 +188,14 @@ router.post('/login', (req, res, next) => {
       if (err instanceof UserError) {
         printers.errorPrint(err.getMessage());
 
-        req.flash('error', err.getMessage());
+        // req.flash('error', 'Invalid username and/or password');
         res.status(err.getStatus());
-        res.redirect('/login')
-        // res.render('login', {
-        //   title: 'login',
-        //   errors: "username and/or password not exist,try again",
-        //   username: username
-        // });
+        // res.redirect('/login')
+        res.render('login', {
+          title: 'login',
+          errors: "username and/or password not exist,try again",
+          username: username
+        });
       } else {
         next(err);
       }

@@ -12,218 +12,38 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-#flash-message{
-    position:fixed;
-    left:50%;
-    top:25%;
-
+#flash-message {
+    color: lightpink;
+    text-align: center;
+    margin: 10px auto;
 }
-#flash-message div{
+
+#flash-message div {
     text-align: center;
 }
 
-/**************** Navigation ****************/
-/* header {
-    overflow: hidden;
-    background-color: white;
-    font-family: sans-serif;
-    width: 100vw;
-}
-
-header nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: whitesmoke;
-   
-}
-
-header nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-header nav li {
-    float: left;
-}
-
-header nav li a {
-    display: block;
-    color: black;
-    text-align: left;
-    padding: 20px 40px;
-    text-decoration: none;
-
-}
-
-header nav li a.active {
-    background-color: rgb(98, 187, 209);
-}
-
-header nav li a:hover {
-    background-color: rgb(98, 118, 209);
-    color: rgb(15, 14, 14);
-   
-}
- .search-container {
-    float: right;
-  }
-
-form {
-    padding:10px;
-    margin-top: 8px;
-    font-size: 17px;
-    border: none;
-  }
-
-  #searchtext{
-    padding:15px 100px;
-  }
-
-  .search_button{
-    float: right;
-    padding: 10px 10px;
-    margin-top: 8px;
-    margin-right: 16px;
-    background: #ddd;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-  } */
-
-
-
-header nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-header nav li {
-    float: left;
-}
-
-.topnav {
-    overflow: hidden;
-    background-color: #e9e9e9;
+.alert-login {
     text-align: center;
-    margin: 0 auto;
     position: fixed;
-    top: 0;
     width: 100%;
 }
 
-.topnav a {
-    float: left;
-    color: black;
-    text-align: center;
-    padding: 14px 50px;
-    text-decoration: none;
-    font-size: 17px;
-}
 
-.topnav .logsign {
+.searchbar{
     float: right;
-
-    color: black;
-    text-align: center;
-    padding: 0px 180px;
-    text-decoration: none;
-    font-size: 17px;
-    margin: 0 auto
+}
+.searchbar input[type=text] {
+   
+        padding: 6px;
+        margin-top: 8px;
+        font-size: 17px;
+        border: none;
+  
+            border: 1px solid #ccc;  
 }
 
-/* a .logsign1 {
+.searchbar button {
     float: right;
-    border-radius: 15px;
-    color: black;
-    text-align: center;
-    background-color: #d67fb2;
-    padding: 13px 25px;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 2px auto
-} */
-
-#signup {
-    margin: 2px auto;
-    float: right;
-    border-radius: 15px;
-    color: black;
-    text-align: center;
-    background-color: #87b6d6;
-    padding: 13px 25px;
-    text-decoration: none;
-    font-size: 16px;
-
-}
-
-#signout {
-    margin: 2px auto;
-    float: right;
-    border-radius: 15px;
-    color: black;
-    text-align: center;
-    background-color: #e7cc51;
-    padding: 13px 25px;
-    text-decoration: none;
-    font-size: 16px;
-    display: none;
-
-}
-
-.topnav .logsign a {
-
-    float: right;
-    border-radius: 15px;
-    color: black;
-    text-align: center;
-    background-color: #d67fb2;
-    padding: 13px 25px;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 2px auto;
-
-    /* color: black;
-    text-align: center;
-    padding: 14px 50px;
-    text-decoration: none;
-    font-size: 17px; */
-}
-
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.topnav a.active {
-    background-color: #64aae4;
-    color: white;
-    padding: 15px 50px;
-}
-
-.topnav .search-container {
-    /* float: right;
-    padding:0px 30px; */
-
-    width: 100%;
-    text-align: center;
-
-}
-
-.topnav input[type=text] {
-    padding: 6px 150px;
-    margin-top: 8px;
-    font-size: 17px;
-    border: none;
-}
-
-.topnav .search-container7 button {
-    /* float: right; */
-    text-align: center;
     padding: 6px 10px;
     margin-top: 8px;
     margin-right: 16px;
@@ -231,56 +51,35 @@ header nav li {
     font-size: 17px;
     border: none;
     cursor: pointer;
-}
+  }
 
-.topnav .search-container button:hover {
-    background: #ccc;
-}
-
-@media screen and (max-width: 600px) {
-    .topnav .search-container {
-        float: none;
-    }
-
-    .topnav a,
-    .topnav input[type=text],
-    .topnav .search-container button {
-        float: none;
-        display: block;
-        text-align: left;
-        width: 100%;
-        margin: 0;
-        padding: 14px;
-    }
-
-    .topnav input[type=text] {
-        border: 1px solid #ccc;
-    }
-}
 
 /* Merged from fetchstyle.css */
-.background {
+.container-box{
     background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-    height: 100vh;    
-}
-
-.container {
-    justify-content: center;
     width: 100%;
     height: 100vh;
-    flex-wrap: wrap;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: scroll;
+}
+/*div for each pics*/
+.container {
+    margin: 25px;
+    justify-content: center;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 0fr);
-    gap: 2rem;
-    align-items: flex-start;
-    margin: 50px;
-    margin-top: 10%;
+    grid-template-columns: repeat(4, 0fr);
+    gap: 4rem;
+    padding: 100px;
 }
 
 div .pic {
     height: 200px;
     width: 200px;
+    border-radius: 5%;
+    margin:0px 50px;
 }
 
 div .title {
@@ -289,12 +88,35 @@ div .title {
 }
 
 div .post {
-    border: none;
+    border: solid 1px;
+    
+    border-radius:5%;
+    background-color: rgba(0,0,0,.3);
+    color: rgb(226, 218, 218);
+}
+
+#postdetails{
+    padding:12px 35px;
+    margin:0 0 8px 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: pink;
+    background-color: pink;
+}
+
+
+.card-text{
+    font-family: sans-serif;
+    color: white;
+    font-size: 18px;
+   text-align: center;
 }
 
 /****************Form****************/
 
-.wrap {
+/* .wrap {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -302,9 +124,9 @@ div .post {
     align-items: center;
     background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
     overflow-x: scroll;
-}
+} */
 
-.wrap .form {
+ .form {
     width: 980px;
     height: 670px;
     display: flex;
@@ -313,13 +135,13 @@ div .post {
     box-shadow: 0 25px 45px rgba(14, 13, 13, 0.2);
 }
 
-.wrap .form .left {
+.form .left {
     width: 330px;
     height: 670px;
     display: inline-block;
 }
 
-.wrap .form .left img {
+.form .left img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -328,7 +150,7 @@ div .post {
     background-position: center;
 }
 
-.wrap .form .right {
+ .form .right {
     width: 650px;
     height: 670px;
     background: white;
@@ -338,7 +160,7 @@ div .post {
     font-family: sans-serif;
 }
 
-.wrap .form .right .right-content {
+ .form .right .right-content {
     width: 70%;
     padding-top: 75px;
     display: flex;
@@ -347,7 +169,7 @@ div .post {
     height: 100%;
 }
 
-.wrap .form .right .right-content .title {
+ .form .right .right-content .title {
     font-size: 26px;
     color: #0c3483;
     font-weight: bold;
@@ -355,7 +177,7 @@ div .post {
 }
 
 /*all text input box*/
-.wrap .form .right .right-content .input-group {
+ .form .right .right-content .input-group {
     width: 100%;
     padding: 6px 0px;
     /* height: 45px; */
@@ -365,7 +187,7 @@ div .post {
 }
 
 /*all text input bottom line and input styling*/
-.wrap .form .right .right-content .input-group .text-input {
+.form .right .right-content .input-group .text-input {
     background: transparent;
     outline: none;
     font-size: 20px;
@@ -376,12 +198,12 @@ div .post {
 
 }
 
-.wrap .form .right .right-content .input-group .text-input:focus {
+ .form .right .right-content .input-group .text-input:focus {
     border-color: rgb(51, 78, 153);
     /* box-shadow: inser 0 0 3px blue; */
 }
 
-.wrap .form .right .right-content label {
+ .form .right .right-content label {
     font-size: 16px;
     font-weight: 400;
     color: #0c3483;
@@ -390,12 +212,12 @@ div .post {
 
 }
 
-.wrap .form .right .right-content .input-group .text-input::placeholder {
+ .form .right .right-content .input-group .text-input::placeholder {
     color: rgb(72, 137, 197);
     font-size: 14px;
 }
 
-.wrap .form .right .right-content .center-img {
+.form .right .right-content .center-img {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -403,7 +225,7 @@ div .post {
 }
 
 /*login, register,create post button*/
-.wrap .form .right .right-content button {
+ .form .right .right-content button {
     padding: 20px 25px;
     margin-bottom: 1rem;
     font-size: 16px;
@@ -419,12 +241,12 @@ div .post {
 }
 
 /*login,register,creat post button hover*/
-.wrap .form .right .right-content button:hover {
+ .form .right .right-content button:hover {
     background-color: rgb(218, 93, 191);
 }
 
 /*two buttons same row*/
-.wrap .form .right .right-content .button-group {
+ .form .right .right-content .button-group {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -432,15 +254,15 @@ div .post {
 }
 
 /*clear button*/
-.wrap .form .right .right-content .button-group .button-re {
+.form .right .right-content .button-group .button-re {
     background-color: #1680e3;
 }
 
-.wrap .form .right .right-content .button-group .button-re:hover {
+ .form .right .right-content .button-group .button-re:hover {
     background-color: rgb(83, 198, 226);
 }
 
-.wrap .form .right .right-content .form-footer {
+ .form .right .right-content .form-footer {
     padding-top: 1rem;
     color: #0c3483;
     font-family: sans-serif;
@@ -449,38 +271,38 @@ div .post {
 
 }
 
-.wrap .form .right .right-content .form-footer a {
+ .form .right .right-content .form-footer a {
     color: palevioletred;
     font-family: sans-serif;
     font-weight: bold;
     text-decoration: none;
 }
 
-.wrap .form .right .right-content .form-footer a:hover {
+ .form .right .right-content .form-footer a:hover {
     color: lightpink;
 }
 
 /*styling all check box and related words,policy link */
-.wrap .form .right .right-content .checkbox-group {
-    font-size: 100%;
+ .form .right .right-content .checkbox-group {
+    font-size: 80%;
     display: flex;
     align-items: center;
     /* padding-bottom: 10px; */
     padding-top: 22px;
 }
 
-.wrap .form .right .right-content .checkbox-group span {
+ .form .right .right-content .checkbox-group span {
     color: #0c3483;
     font-size: medium;
     font-family: sans-serif;
 }
 
-.wrap .form .right .right-content .checkbox-group input[type='checkbox'] {
+ .form .right .right-content .checkbox-group input[type='checkbox'] {
     margin-right: 15px;
 
 }
 
-.wrap .form .right .right-content .checkbox-group a {
+ .form .right .right-content .checkbox-group a {
     color: rgb(38, 0, 255);
 }
 
@@ -489,7 +311,7 @@ div .post {
 }
 
 /*styling all upload file button and related area*/
-.wrap .form .right .right-content input[type=file] {
+ .form .right .right-content input[type=file] {
     font-size: 16px;
     color: #68acd3;
     border: 2px solid;
@@ -497,12 +319,12 @@ div .post {
     width: 100%;
 }
 
-.wrap .form .right .right-content input[type=file]:hover {
+ .form .right .right-content input[type=file]:hover {
     box-shadow: inset 0px 0px 2px rgb(146, 199, 206);
     background: #cfdadf;
 }
 
-.wrap .form .right .right-content .file-upload-group {
+ .form .right .right-content .file-upload-group {
     border-bottom: none;
     width: 100%;
     padding-top: 0px;
@@ -510,79 +332,161 @@ div .post {
 
 
 /*styling description text area*/
-.wrap .form .right .right-content textarea {
+ .form .right .right-content textarea {
     border: 2px solid rgb(82, 176, 189);
     padding: 0px;
-    width: 100%;
-    height: 150px;
+    width: 90%;
+    height: 100px;
     color: black;
     font-family: sans-serif;
     font-size: 20px;
-    margin-top: 0rem;
+    margin:0 atuo;
 }
 
-.wrap .form .right .right-content #select-image {
+ .form .right .right-content #select-image {
     text-align: left;
     font-family: sans-serif;
     color: #0c3483;
     margin-top: 0px;
+   padding: 5px 5px;
 }
 
-/************* View Post **************/
-.left-area {
-    float: right;
-    width: 10%;
-    height: 100vh;
-    background-color: rgb(21, 65, 104);
-    padding: 100px 20px;
-    text-align: center;
 
 
+/*************  View Post **************/
+.viewpostbody{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
-#signout_viewpost {
-    display: inline-block;
+.viewpost-box {
+    display: flex;
+    width:80rem;
+    height: 55rem;
+    background: #518ec0;
+    margin:0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 45px rgba(14, 13, 13, 0.3);
+   
 }
 
-.right-post-area {
-    float: flex;
-    padding: 10px;
+.viewpost-box.left {
+    /* width: 500px;
+    height: 600px; */
+   
+
+    /* position: relative; */
+}
+  
+
+.viewpost-box .left img {
+    /* width: 50%;
+    height: 50%;
+    object-fit: cover; */
+    width: 450px;
+    margin-top: 120px;
+    border-radius: 20px;
+
+    /* padding: 100px 20px; */
+    /* background-position: center; */
+    /* border-radius: 50%; */
+}
+
+.viewpost-box .right {
+    width: 64%;
+    height: 75rem;
+    background-color: rgb(236, 233, 227);
+    /* background: rgb(27,36,45);
+background: radial-gradient(circle, rgba(27,36,45,1) 0%, rgba(34,35,103,1) 100%); */
+    /* background: url("/public/image/space.jpg"); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+  
+   
+}
+
+.viewpost-box .right .right-content {
+   
     width: 100%;
-    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-    height: 100vh;
+    padding: 48px;;
+    /* display: flex; */
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
 }
 
-.right-post-area .image-container {
-    display: grid;
-    grid-template-columns: repeat(2, 0fr);
-    gap: 1.5rem;
+.information {
 
-}
 
-.right-post-area .img {
-    object-fit: cover;
-    margin: 20px 30px;
-    margin-left: 10%;
-    float: left;
+    /* outline:none; */
 
-}
-
-.left-area h2 {
+ 
+    font-size: 16px;
+    font-family: sans-serif;
     color: white;
-    font-family: sans-serif;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    font-weight: bold;
+    margin-top: 0.2rem;
+    margin: 20px 25px;
+    text-align: left;
+   
+    /* padding-bottom: 0px; */
+
 }
 
-
-.left-area p {
+.image-info{
+    font-size: 17px;
     font-family: sans-serif;
-    color: #e8eef1;
-    font-size: 20px;
-    line-height: 2em;
-    margin-bottom: 20px;
+    color: rgb(222, 231, 232);
+    height: 55px;
 }
 
+.center {
+    /* margin: auto;
+    width: 80%; */
+    text-align: center;
+  }
+
+ textarea{
+    margin-left: 20px;
+    float: left;
+    display: inline-block;
+ }
+
+ .comment-button{
+    background-color: #d0a523;
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+  #comment{
+      float: left;
+  }
+
+  .allcomment{
+    background-color: rgb(235, 232, 232);
+    width: 40rem;
+    height:650px;
+    border: 2px solid rgb(214, 175, 68);
+    padding: 50px;
+    margin: 20px;
+    float: left;
+    border-radius: 15px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+  }
 /****************** Footer ******************/
 footer {
     position: fixed;
@@ -620,10 +524,11 @@ body::-webkit-scrollbar {
 }
 
 /*********************log in error message********************/
-#message{
-background-color: #f1f1f1;
-padding: 20px;
-margin-left: 20%;
-margin-right: 20%;
-margin-top: 2%;
-border: 2px solid #420caf;}
+#message {
+    background-color: #f1f1f1;
+    padding: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 2%;
+    border: 2px solid #420caf;
+}

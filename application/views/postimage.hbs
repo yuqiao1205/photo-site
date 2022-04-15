@@ -1,21 +1,17 @@
-
 <h1 class="title">Create a Post</h1>
-<form action="#" method="post" class="contact-form">
+<form action="/posts/createPost" method="post" class="contact-form" enctype="multipart/form-data">
 
     <div class="input-group">
         <label for="posttitle">Title</label>
-        <input class="text-input" type="text" id="posttitle" name="posttitle" placeholder="Enter Image Title Here"
-            required>
+        <input class="text-input" type="text" id="posttitle" name="title" placeholder="Enter Image Title Here" required>
     </div>
-    <div>
+    <div class="input-group">
         <label for="description">Description</label>
         <textarea name="description" rows="8" cols="50" placeholder="Enter Description Here" required></textarea>
     </div>
     <div class="input-group file-upload-group">
-        <div id="select-image">
-            <p>Select an image to upload</p>
-        </div>
-        <input type="file" id="img" name="img" required>
+        <p class="select">Select an image to upload</p><br>
+        <input type="file" id="img" name="uploadImg" required>
     </div>
     <div class="checkbox-group">
         <input type="checkbox" name="auserp" required>

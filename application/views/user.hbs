@@ -1,5 +1,11 @@
-    {{>header}}
 
-    <h1>welcome</h1>
-
-    <div id="content" class="container"></div>
+    <div class="container-box">
+        
+        <div class="wrap">
+            <div id="content" class="container">
+            {{#each results}}
+            {{>card this}}
+            {{/each}}
+            </div>
+        </div>
+    </div>
