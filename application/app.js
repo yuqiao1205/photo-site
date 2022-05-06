@@ -4,9 +4,9 @@ const favicon = require('serve-favicon');
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-var sessions = require("express-session");
-var mysqlSession = require('express-mysql-session')(sessions);
-var flash = require('express-flash');
+const sessions = require("express-session");
+const mysqlSession = require('express-mysql-session')(sessions);
+const flash = require('express-flash');
 const handlebars = require("express-handlebars");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -24,17 +24,14 @@ app.engine(
     layoutsDir: path.join(__dirname, "views/layouts"), //where to look for layouts
     partialsDir: path.join(__dirname, "views/partials"), // where to look for partials
     extname: ".hbs", //expected file extension for handlebars files
-    defaultLayout: "layout", //default layout for app, general template for all pages in app
+    defaultLayout: "defaultlayout", //default layout for app, general template for all pages in app
     helpers: {
       emptyObject: (obj) => {
-        // return !(obj.constructor === Object && Object.keys(obj).length === 0);
-        return !(Object.keys(obj).length === 0);
+         return !(obj.constructor === Object && Object.keys(obj).length === 0);
+        
       }
     },
-    section: function(name, options){
-      if(!this._sections) this._sections = {};
-      this._sections[name] = options.fn(this);
-      return null;}//adding new helpers to handlebars for extra functionality
+   //adding new helpers to handlebars for extra functionality
   })
 );
 
@@ -46,12 +43,13 @@ app.use(sessions({
   secret: "this is a secret from csc317",
   store: mysqlSessionStore,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { 
+    secure: false,  // setting this false for http connections
+    maxAge: 3600000,
+    expires: new Date(Date.now() + 3600000) 
+  }
 }));
-
-// app.use(sessions({
-//   secret: "hello world",
-// }));
 
 app.use(flash());
 
@@ -72,7 +70,6 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use((req, res, next) => {
 
   if (req.session.username) {
-    console.log(req.session);
     requestPrint("User logged in, session.name=" + req.session.username);
     res.locals.logged = true;
   } else {
@@ -91,9 +88,12 @@ app.use('/comments',commentRouter);
  * Catch all route, if we get to here then the
  * resource requested could not be found.
  */
-// app.use((req, res, next) => {
-//   next(createError(404, `The route ${req.method} : ${req.url} does not exist.`));
-// })
+app.use((req, res, next) => {
+  next(createError(404, `The route ${req.method} : ${req.url} does not exist.`));
+})
+app.post('/postimage',(req,res)=>{
+  console.log(req.body)
+})
 
 
 /**

@@ -11,84 +11,119 @@
 
  /* Body of the page */
  body {
-     background: #f2f2f2;
+     background: rgb(255,255,255);
  }
 
  /* Styling all the elements in nav as a whole */
  nav {
-     background: rgb(13, 74, 125);
+
+     background-color:rgb(255,255,255);
      display: flex;
      flex-wrap: wrap;
      align-items: center;
      justify-content: space-between;
-     height: 80px;
+     height: 65px;
      padding: 0 100px;
  }
 
  /* Styling the logo */
  nav .logo {
-     color: #fff;
+    color: rgb(72,61,139);
+     /* color: rgb(0,112,184); */
      font-size: 30px;
      font-weight: 600;
      letter-spacing: -1px;
+     margin:-45px;
+     text-shadow: 1px 1px 0px lightblue,
+     2px 2px 2px lightblue,
+     3px 3px 2px lightblue,
+     5px 5px 2px lightskyblue;
+   
  }
 
  /* Styling all the nav items as a whole */
  nav .nav-items {
      display: flex;
      flex: 1;
-     padding: 0 0 0 200px;
+     padding: 0 0 0 170px;
+   
+     /* border: 1px solid rgb(72, 191, 218);
+     width:250px;
+     height: 34px; */
  }
 
  /* Styling the list items in the nav tag */
  nav .nav-items li {
      list-style: none;
      padding: 0 10px;
+     /* border: 1px solid rgb(72, 191, 218);
+     border-radius: 15px;
+     background-color: rgb(0,147,175); */
+     
+     
  }
 
  /* Styling each list items */
- nav .nav-items li a,
+ nav .nav-items li a{
+    color: rgb(0,147,175);
+    padding: 8px 15px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+ }
+
  #login {
-     color: #fff;
+     color: black;
      font-size: 18px;
      font-weight: 500;
      text-decoration: none;
+     padding: 0px 13px;
  }
 
  /* Setting the hover colour on the list items*/
-
  nav .nav-items li a:hover {
-     color: yellow;
+      color: white;
+    background:rgb(0,147,175);
  }
 
  #login:hover {
-     color: yellow;
+     color: rgb(0,149,182);
+     
  }
 
  #login:visited {
-    color: white;
-}
+     color:rgb(221, 30, 154);
+ }
 
  nav .searchbar {
      position: relative;
-     margin:0px 10px;
-    
- }
+     
+}
+     
+
+
+ #search-button {
+         padding: 10px 18px;
+          background-color:rgb(69,177,232);
+          color: white;
+          margin:6px -10px;
+     }
 
  /* Styling the search box where the 
      input would be given */
  nav .searchbar input[type="text"] {
-     /* border: 0;
-     padding: 0;
-     width:50px;
-     height: 35px;
-     border-radius: 3px;
-     transition: all 0.3s ease; */
-     padding: 6px 20px;
-  margin-top: 8px;
-  font-size: 17px;
-  border: none;
-  width: 350px;
+
+     padding: 8px 20px;
+     margin-top: 6px;
+     font-size: 17px;
+     border: none;
+     width: 455px;
+     background-color:rgb(242,243,244);
+     border: 2px solid rgb(116, 197, 218);
+
  }
 
  /* Styling the search bar icon */
@@ -101,7 +136,7 @@
      height: 100%;
      background: none;
      border-radius: 3px;
-     color: #fff;
+     color: white;
      transition: all 0.5s 0.3s ease;
  }
 
@@ -111,25 +146,26 @@
      left: 50%;
      transform: translate(-50%, -50%);
      cursor: pointer;
+  
  }
 
-
-
-
-
- nav .licon li {
+ nav  li {
      list-style: none;
      display: flex;
  }
 
- nav .licon li a {
+ nav  li a {
      padding: 0 20px;
-     color:white;
+     color:rgb(218, 73, 73);
  }
 
  /* Changing the colour of the login 
      icon when hovered over*/
 
  .fa-user-circle:hover {
-     color: #0e0e0d !important;
+     color: #1e202a !important;
  }
+
+#logout{
+    padding:1px 20px;
+}

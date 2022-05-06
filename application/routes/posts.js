@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require("../config/database");
+var PostModel = require('../models/Posts');
+
 const {
     successPrint,
     errorPrint
@@ -9,6 +11,10 @@ var sharp = require('sharp');
 var multer = require('multer');
 var crypto = require('crypto');
 var PostError = require('../helpers/error/PostError');
+
+const {
+    check
+} = require('express-validator');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -21,90 +27,131 @@ var storage = multer.diskStorage({
     }
 });
 
-var uploader = multer({
-    storage: storage
-});
-// TODO/*do server validation, if any values that used for the insert statement are undefind,
-// mysql,query or execute will fail with the following error: BIND paramters cannot be undefined*/
-
-router.post('/createPost', uploader.single("uploadImg"), (req, res, next) => {
-    console.log(req);
-    let fileUploaded = req.file.path;
-    let fileAsThumbnail = `thumbnail-${req.file.filename}`;
-    let destinationOfThumbnail = req.file.destination + '/' + fileAsThumbnail;
-    let title = req.body.title;
-    let description = req.body.description;
-    let fk_userId = req.session.userid;
-
-    sharp(fileUploaded)
-        .resize(200)
-        .toFile(destinationOfThumbnail)
-        .then(() => {
-            let baseSQL = "INSERT INTO posts (title,description,photopath,thumbnail,created,fk_userId) VALUES (?,?,?,?,now(),?);";
-            console.log("title=" + title + "des=" + description + "file=" + fileUploaded + "des" + destinationOfThumbnail + "fkid" + fk_userId);
-            return db.execute(baseSQL, [title, description, fileUploaded, destinationOfThumbnail, fk_userId]);
-        })
-        .then(([results, fields]) => {
-            if (results && results.affectedRows) {
-                //req.flash('success','Your post was created successfully!');
-                res.redirect('/');
-            } else {
-                throw new PostError('Post could not be created!', '/postimage', 200)
-            }
-        })
-        .catch((err) => {
-            if (err instanceof PostError) {
-                errorPrint(err.getMessage());
-                ('error', err.getMessage());
-                req.status(err.getStatus());
-                res.redirect(err.getRedirectURL());
-            } else {
-                next(err);
-            }
-        });
-});
-
-//localhost:3000/post/search?search=value
-router.get('/search', (req, res, next) => {
-    let searchTerm = req.query.search;
-    console.log(req.query);
-    // res.send(req.query);
-    if (!searchTerm) {
-        res.send({
-            resultsStatus: "info",
-            message: "No seach term given",
-            results: []
-        })
+function imageFilter(req, file, cb) {
+    // Accept images only
+    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+        req.fileValidationError = 'Only image files are allowed!';
+        return cb(null, false);
     } else {
-        let baseSQL = "SELECT id,title,description,thumbnail, concat_ws(' ',title,description) AS haystack\
-             FROM posts\
-             HAVING haystack like ?;";
-        let sqlReadySearchTerm = "%" + searchTerm + "%";
-        db.execute(baseSQL, [sqlReadySearchTerm])
-            .then(([results, fields]) => {
-                
-                if (results && results.length) {
-                    res.send({
-                        resultsStatus: "info",
-                        message: `${results.length} results found`,
-                        results: results
+        req.fileValidationError = null;
+    }
+    cb(null, true);
+
+};
+
+var uploader = multer({
+    storage: storage,
+    fileFilter: imageFilter
+});
+
+// server side validation for image post
+router.post('/createPost',
+    check('title', 'Title cannot be empty!').isLength({
+        min: 1
+    }),
+    check('description').exists().withMessage('Description is required!'),
+    uploader.single("uploadImg"),
+    (req, res, next) => {
+        // Check required fields of title, description
+        {
+            let errorMessage = '';
+
+            if (!req.body.title) {
+                errorMessage += "Title is required!  ";
+            }
+
+            if (!req.body.description) {
+                errorMessage += "Description is required! ";
+            }
+
+            if (errorMessage !== '') {
+                req.flash('error', errorMessage);
+
+                res.status(200);
+                req.session.save(function (err) {
+                    res.redirect('/postimage');
+                });
+
+                return;
+            }
+        }
+
+        // Check image type and check upload file is empty or not
+        if (req.fileValidationError) {
+            req.flash('error', req.fileValidationError);
+            req.session.save(function (err) {
+                res.redirect('/postimage');
+            });
+            return;
+        } else if (!req.file) {
+            req.flash('error', 'Image upload file is required!');
+            req.session.save(function (err) {
+                res.redirect('/postimage');
+            });
+            return;
+        }
+
+        let fileUploaded = req.file.path;
+        let fileAsThumbnail = `thumbnail-${req.file.filename}`;
+        let destinationOfThumbnail = req.file.destination + '/' + fileAsThumbnail;
+        let title = req.body.title;
+        let description = req.body.description;
+        let fk_userId = req.session.userId;
+
+        sharp(fileUploaded)
+            .resize(200)
+            .toFile(destinationOfThumbnail)
+            .then(() => {
+                return PostModel.create(title, description, fileUploaded, destinationOfThumbnail, fk_userId);
+            })
+            .then((postWasCreated) => {
+                if (postWasCreated) {
+
+                    req.flash('success', 'Your post was created successfully!');
+                    req.session.save(function (err) {
+                        res.redirect('/');
                     });
                 } else {
-                    db.query('SELECT id,title,description,thumbnail,created FROM posts ORDER BY created DESC LIMIT 8;', [])
-                        .then(([results, fields]) => {
-                            res.send({
-                                resultsStatus: "info",
-                                message: "No results where found for your search but here are the 8 most recent posts",
-                                results: results
-                            });
-                        })
+                    throw new PostError('Post could not be created!', '/postimage', 200)
                 }
             })
             .catch((err) => {
-                console.log(`Error: ${err}`)
-                next(err);
+                if (err instanceof PostError) {
+                    errorPrint(err.getMessage());
+                    req.status(err.getStatus());
+                    res.redirect(err.getRedirectURL());
+                } else {
+                    next(err); 
+                }
             });
-    }
-});
+    });
 
+
+router.get('/search', async (req, res, next) => {
+                try {
+                    let searchTerm = req.query.search;
+                    if (!searchTerm) {
+                        res.send({
+                            message: "No seach term given",
+                            results: []
+                        });
+                    } else {
+                        let results = await PostModel.search(searchTerm);
+                        if (results.length) {
+                            res.send({
+                                message: `${results.length} results found`,
+                                results: results
+                            });
+                        } else {
+                            let results = await PostModel.getRecentPosts(5);
+                            res.send({
+                                message: "No results found, but here are the 5 most recent posts",
+                                results: results
+                            });
+                        }
+                    }
+                } catch (err) {
+                    next(err);
+                }
+            })
 module.exports = router;

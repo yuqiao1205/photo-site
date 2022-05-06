@@ -28,10 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
         flashMessageDiv.appendChild(innerFlashDiv);
         flashMessageDiv.setAttribute('id', 'flash-message');
         innerFlashDiv.setAttribute('class', 'alert alert-info');
-        //let body = document.getElementsByTagName('body')[0]
+    
         parentNode.appendChild(flashMessageDiv);
         setFlashMessageFadeOut(flashMessageDiv);
     }
+    document.addFlashFromFrontEnd = addFlashFromFrontEnd;
 
     function executeSearch() {
         let searchTerm = document.getElementById('search-text').value;
@@ -66,14 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createCard(postData) {
         return `<div id="post-${postData.id}" class="post">
-        <div class="title">${postData.title}</div>
         <img class="pic" src="${postData.thumbnail}" alt="Missing Image">
-        <p class="card-text"> ${postData.description}</p><br>
-        <div class="detail-button">
+        <div class="title"><strong><p>${postData.title}</p></strong></div>
+        <div class="description"><p>${postData.description}</p></div>
         <button id="postdetails" onclick="location.href='/post/${postData.id}'" type="button">
-             Details</button>
-             </div>
+             More</button>
+            
     </div> `;
     }
 
 });
+

@@ -1,27 +1,32 @@
-<h1 class="title">Create a Post</h1>
-<form action="/posts/createPost" method="post" class="contact-form" enctype="multipart/form-data">
+ <script type="text/javascript" src="/public/js/postimg_validation.js"></script>
+ <h1 class="title">Create a Post</h1>
+ <form action="/posts/createPost" id="postimage" method="post" class="contact-form" enctype="multipart/form-data">
+     <div id="submit_log" class="error"></div>
+     <div class="input-group">
+         <label for="posttitle">Title</label>
+         <div id="title_message" class="error"></div>
+         <input class="text-input" type="text" id="posttitle" name="title" placeholder="Enter Image Title Here">
+     </div>
+     <div class="input-group">
+         <label for="description">Description</label>
+         <div id="description_message" class="error"></div>
+         <textarea id="description" name="description" rows="8" cols="50"
+             placeholder="Enter Description Here"></textarea>
+     </div>
+     <div class="input-group file-upload-group">
+         <p class="select">Select an image to upload</p><br>
+         <div id="uploadfile_message" class="error"></div>
+         <input type="file" id="img" name="uploadImg">
+     </div>
+     <div class="checkbox-group">
+         <input type="checkbox" name="auserp" required>
+         <span>I agree to the&nbsp; </span> <a href="#">Acceptable
+             Use Policy</a><span>&nbsp;for uploading images.</span><br><br><br>
 
-    <div class="input-group">
-        <label for="posttitle">Title</label>
-        <input class="text-input" type="text" id="posttitle" name="title" placeholder="Enter Image Title Here" required>
-    </div>
-    <div class="input-group">
-        <label for="description">Description</label>
-        <textarea name="description" rows="8" cols="50" placeholder="Enter Description Here" required></textarea>
-    </div>
-    <div class="input-group file-upload-group">
-        <p class="select">Select an image to upload</p><br>
-        <input type="file" id="img" name="uploadImg" required>
-    </div>
-    <div class="checkbox-group">
-        <input type="checkbox" name="auserp" required>
-        <span>I agree to the&nbsp; </span> <a href="#">Acceptable
-            Use Policy</a><span>&nbsp;for uploading images.</span><br><br><br>
+     </div>
+     <div class="button-group">
+         <button class="button-re" type="reset">Clear</button>
+         <button class="button-sub" type="submit">Create Post</button>
 
-    </div>
-    <div class="button-group">
-        <button class="button-re" type="reset">Clear</button>
-        <button class="button-sub" type="submit">Create Post</button>
-
-    </div>
-</form>
+     </div>
+ </form>

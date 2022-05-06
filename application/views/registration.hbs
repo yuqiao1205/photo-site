@@ -1,54 +1,51 @@
-  {{!-- <script type="text/javascript" src="/public/js/validation.js"></script> --}}
-  <div>{{errors}}</div>
+    <script type="text/javascript" src="/public/js/register_validation.js"></script>
 
-  <h1 class="title">Register</h1>
-  <form name="myform" method="post" id="registration" action="/users/register"
-      enctype="application/x-www-form-urlencoded">
-      <div id="submit_log" class="error"></div>
-      <div class="input-group">
-          <label for="username">Username</label>
-          <div id="username_message" class="error"></div>
-          <input class="text-input" id="username" name="username" type="text" placeholder="Enter Username Here"
-              value="{{username}}">
+    <h1 class="title">Register</h1>
+    <form name="myform" method="post" id="registration" action="/users/register"
+        enctype="application/x-www-form-urlencoded">
+        <div id="submit_log" class="error"></div>
+        <div class="input-group">
+            <label for="username">Username</label>
+            <div id="username_message" class="error"></div>
+            <input class="text-input" id="username" name="username" type="text" placeholder="Enter Username Here"
+                value="{{username}}">
+        </div>
+        <div class="input-group">
+            <label for="email">Email</label>
+            <div id="email_message" class="error"></div>
+            <input class="text-input" type="email" id="email" name="email" placeholder="Enter Email Here"
+                value="{{email}}">
 
-      </div>
-      <div class="input-group">
-          <label for="email">Email</label>
-          <div id="email_message" class="error"></div>
-          <input class="text-input" type="email" id="email" name="email" placeholder="Enter Email Here"
-              value="{{email}}">
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <div id="password_message" class="error"></div>
+            <input class="text-input" id="password" name="password" type="password" placeholder="Enter Password Here">
+            <div class="password-requirment">8 characters minimum and contain at least 1 number 1
+                symbol 1 uppercase</div><br>
+        </div>
+        <div class="input-group">
+            <label for="re_enter_password">Re-enter Password</label>
+            <div id="re_enter_password_message" class="error"></div>
+            <input class="text-input" id="re_enter_password" name="cpassword" type="password"
+                placeholder="Re-enter Password">
 
-      </div>
-      <div class="input-group">
-          <label for="password">Password</label>
-          <div id="password_message" class="error"></div>
-          <input class="text-input" id="password" name="password" type="password" placeholder="Enter Password Here">
-          <div class="password-requirment">8 characters minimum and contain at least 1 number 1
-              symbol 1 uppercase</div><br>
+        </div>
+        <div class="checkbox-group">
+            <input class="makecheckbox" name="age" required type="checkbox"> <span>I am 13+ years of age.</span>
+        </div>
+        <div class="checkbox-group">
+            <input class="makecheckbox" name="tos" required type="checkbox">
+            <span>I agree to the&nbsp; </span> <a href="#">TOS and Privacy
+            </a><span> &nbsp;for uploading images. </span>
 
-      </div>
-      <div class="input-group">
-          <label for="re_enter_password">Re-enter Password</label>
-          <div id="re_enter_password_message" class="error"></div>
-          <input class="text-input" id="re_enter_password" name="cpassword" type="password"
-              placeholder="Re-enter Password">
+        </div>
+        <div class="button-group">
 
-      </div>
-      <div class="checkbox-group">
-          <input class="makecheckbox" name="age" required type="checkbox"> <span>I am 13+ years of age.</span>
-      </div>
-      <div class="checkbox-group">
-          <input class="makecheckbox" name="tos" required type="checkbox">
-          <span>I agree to the&nbsp; </span> <a href="#">TOS and Privacy
-          </a><span> &nbsp;for uploading images. </span>
-
-      </div>
-      <div class="button-group">
-
-          <button class="button-re" id="reload">Cancel</button>
-          <button class="button-sb" id="submit">Register</button>
-      </div>
-      <div class="form-footer">
-          Already have an account? <a href="/login"> Log In </a>
-      </div>
-  </form>
+            <button class="button-re" id="reload">Cancel</button>
+            <button class="button-sb" id="submit">Register</button>
+        </div>
+        <div class="form-footer">
+            Already have an account? <a href="/login"> Log In </a>
+        </div>
+    </form>

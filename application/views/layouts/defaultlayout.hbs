@@ -29,18 +29,18 @@
     }
 </script>
 {{/if}}
-{{>header}}
 
 <body>
+    {{> header}}
     <h4 class="alert-login">
         {{#if (emptyObject messages)}}
         {{>flashmessage}}
         {{/if}}
     </h4>
     <div class="container-box">
+
         {{{body}}}
     </div>
+    {{> footer}}
 </body>
-
-
 </html>

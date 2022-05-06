@@ -1,31 +1,37 @@
 <nav>
     <div class="logo">
-        Image Post Application
+        Yan's Image Post Application
     </div>
 
+
     <div class="nav-items">
+        {{#if logged}}
         <!-- The Menu items -->
         <li><a href="/">HOME</a></li>
         <li><a href="/postimage">+POST</a></li>
+
+        {{else}}
+        <li><a href="/">HOME</a></li>
+        <li><a href="/postimage">+POST</a></li>
         <li><a href="/registration">REGISTER</a></li>
+        {{/if}}
     </div>
 
     <!-- Defining the search bars -->
     <div class="searchbar">
-        <input  id="search-text" type="text" placeholder="Search..." name="search">
+        <input id="search-text" type="text" placeholder="Search..." name="search">
         <button id="search-button" type="submit"><i class="fa fa-search"></i></button>
     </div>
 
     <!-- Defining the login button -->
-    <div class="licon">
-        <li>
-            {{#if logged}}
-            <a id="logout" href="/logout">LOGOUT</a>
-            <i class="fa fa-user" aria-hidden="true" style="color: white"></i>
-            {{else}}
-            <a id="login" href="/login">LOGIN</a>
-            <i class="fa fa-user" aria-hidden="true" style="color: white"></i>
-            {{/if}}
-        </li>
-    </div>
+    {{#if logged}}
+    <a id="logout" href="/logout">LOGOUT</a>
+    <i class="fa fa-user" aria-hidden="true" style="color: rgb(10, 10, 11)"></i>
+    {{else}}
+    <a id="login" href="/login">LOGIN</a>
+    <i class="fa fa-user" aria-hidden="true" style="color: rgb(6, 6, 6)"></i>
+    {{/if}}
+
+
+
 </nav>

@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    {{!-- {{{_sections.head}}} --}}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,35 +12,32 @@
     <link rel="stylesheet" href="/public/css/navbar.css" type="text/css" />
 
     <script src="/public/js/frontend.js"></script>
-    <script src="/public/js/fetch.js"></script>
-
-    {{!-- <script type="text/javascript" src="/public/js/logvalidation.js"></script> --}}
-    {{!-- <script type="text/javascript" src="/public/js/validation.js"></script> --}}
 </head>
 
 
 <body>
-        {{>header}}
-             <h4 class="alert-login">
-                {{#if (emptyObject messages)}}
-                {{>flashmessage}}
-                {{/if}}
-            </h4>
-        <main>
-       <div class="container-box">
-                <div class="form">
-                    <div class="left">
-                        <img src="/public/image/boat.jpg">
-                    </div>
-                    <div class="right">
-                        <div class="right-content">
-                            {{{body}}}
-                        </div>
+    {{> header}}
+    <h4 class="alert-login">
+        {{#if (emptyObject messages)}}
+        {{>flashmessage}}
+        {{/if}}
+    </h4>
+
+    <main>
+        <div class="container-box">
+            <div class="form">
+                <div class="left">
+                    <img src="/public/image/cherry1.jpg">
+                </div>
+                <div class="right">
+                    <div class="right-content">
+                        {{{body}}}
                     </div>
                 </div>
-        </main>
+            </div>
         </div>
-    </div>
+    </main>
+    {{> footer}}
 </body>
 
 </html>

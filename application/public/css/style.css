@@ -2,8 +2,7 @@ body {
     margin: 0;
     position: sticky;
     top: 0;
-    box-sizing: border-box;
-    scrollbar-width: none;
+    /* box-sizing: border-box; */
     overflow-y: scroll;
     padding-top: 10px;
 }
@@ -13,9 +12,16 @@ body::-webkit-scrollbar {
 }
 
 #flash-message {
-    color: lightpink;
+    color: rgb(255, 0, 79);
     text-align: center;
-    margin: 10px auto;
+    margin: 20px auto;
+    font-size: 20px;
+    /* border: 1px solid rgb(233, 108, 116); */
+    width: 1000px;
+    height: 30px;
+    background-color: rgb(255, 250, 250);
+    font-family: sans-serif;
+
 }
 
 #flash-message div {
@@ -28,139 +34,172 @@ body::-webkit-scrollbar {
     width: 100%;
 }
 
-
-.searchbar{
+.searchbar {
     float: right;
 }
+
 .searchbar input[type=text] {
-   
-        padding: 6px;
-        margin-top: 8px;
-        font-size: 17px;
-        border: none;
-  
-            border: 1px solid #ccc;  
+
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+
+    border: 1px solid #ccc;
 }
 
 .searchbar button {
     float: right;
     padding: 6px 10px;
-    margin-top: 8px;
+    margin-top: 5px;
     margin-right: 16px;
     background: #ddd;
     font-size: 17px;
     border: none;
     cursor: pointer;
-  }
+}
 
 
-/* Merged from fetchstyle.css */
-.container-box{
-    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+/* Merged from fetchstyle.css  default layout */
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.container-box {
+
+    /* background-image: url(/public/image/fuji.jpg); */
+    background-image: url(/public/image/cartoon.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: scroll;
 }
-/*div for each pics*/
+
+/* div for each pics */
 .container {
-    margin: 25px;
+    margin: 10px;
     justify-content: center;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 0fr);
-    gap: 4rem;
+    grid-template-columns: repeat(3, 0fr);
+    gap: 3.5rem;
     padding: 100px;
 }
 
 div .pic {
     height: 200px;
-    width: 200px;
-    border-radius: 5%;
-    margin:0px 50px;
+    width: 250px;
 }
 
 div .title {
-    padding: 10px;
-    color: white;
+    padding: 7px;
+    color: rgb(33, 29, 29);
+    font-weight: 500;
+    color: rgb(109, 71, 222);
+    text-align: left;
 }
 
 div .post {
-    border: solid 1px;
-    
-    border-radius:5%;
-    background-color: rgba(0,0,0,.3);
-    color: rgb(226, 218, 218);
+    background-color: rgb(255, 255, 255);
+    padding: 2px 3px;
+
 }
 
-#postdetails{
-    padding:12px 35px;
-    margin:0 0 8px 100px;
+/* detail button */
+#postdetails {
+    padding: 4px 22px;
+    margin: 0 0 15px 153px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
-    border: pink;
-    background-color: pink;
-}
-
-
-.card-text{
+    border: rgb(209, 166, 96);
+    background-color: rgb(252, 194, 0);
     font-family: sans-serif;
-    color: white;
-    font-size: 18px;
-   text-align: center;
+    font-weight: 300;
+    color: rgb(19, 17, 17);
+    border-radius: 15px;
 }
 
-/****************Form****************/
+#postdetails:hover {
+    color: rgb(38, 19, 209);
+    background-color: rgb(255, 219, 88);
+}
 
-/* .wrap {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-    overflow-x: scroll;
+/* .card-text {
+    font-family: sans-serif;
+    color: rgb(39, 36, 36);
+    font-size: 18px;
+    text-align: center;
 } */
 
- .form {
-    width: 980px;
-    height: 670px;
+/****************Form****************/
+@keyframes birdbanner {
+    from {
+        margin-left: 0%;
+    }
+
+    to {
+        margin-left: 43%;
+    }
+}
+
+.bird-banner {
+    margin: -14px 1px;
+    background: radial-gradient(circle, hsla(310, 17%, 93%, 1) 49%, hsla(58, 60%, 75%, 1) 95%);
+}
+
+#birdbanner {
+    margin: 10px;
+    animation: birdbanner 8s ease-in-out 2s;
+    animation-fill-mode: forwards;
+    position: relative;
+    font-family: sans-serif;
+}
+
+.form {
+    width: 900px;
+    height: 640px;
     display: flex;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 25px 45px rgba(14, 13, 13, 0.2);
 }
 
 .form .left {
-    width: 330px;
-    height: 670px;
+    width: 335px;
+    height: 640px;
     display: inline-block;
+    border-radius: 20px;
 }
 
 .form .left img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    width: 500px;
-    height: 670px;
+    width: 335px;
+    height: 640px;
     background-position: center;
 }
 
- .form .right {
-    width: 650px;
-    height: 670px;
+.form .right {
+
+    width: 565px;
+    height: 640px;
     background: white;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: sans-serif;
+
 }
 
- .form .right .right-content {
+.form .right .right-content {
     width: 70%;
     padding-top: 75px;
     display: flex;
@@ -169,18 +208,18 @@ div .post {
     height: 100%;
 }
 
- .form .right .right-content .title {
+.form .right .right-content .title {
     font-size: 26px;
+    text-align: center;
     color: #0c3483;
     font-weight: bold;
     padding-bottom: 0px;
 }
 
 /*all text input box*/
- .form .right .right-content .input-group {
+.form .right .right-content .input-group {
     width: 100%;
     padding: 6px 0px;
-    /* height: 45px; */
     position: relative;
     margin: 20px 0;
 
@@ -198,21 +237,19 @@ div .post {
 
 }
 
- .form .right .right-content .input-group .text-input:focus {
+.form .right .right-content .input-group .text-input:focus {
     border-color: rgb(51, 78, 153);
-    /* box-shadow: inser 0 0 3px blue; */
 }
 
- .form .right .right-content label {
+.form .right .right-content label {
     font-size: 16px;
     font-weight: 400;
     color: #0c3483;
     display: none;
     padding: 10px 50px;
-
 }
 
- .form .right .right-content .input-group .text-input::placeholder {
+.form .right .right-content .input-group .text-input::placeholder {
     color: rgb(72, 137, 197);
     font-size: 14px;
 }
@@ -225,7 +262,7 @@ div .post {
 }
 
 /*login, register,create post button*/
- .form .right .right-content button {
+.form .right .right-content button {
     padding: 20px 25px;
     margin-bottom: 1rem;
     font-size: 16px;
@@ -241,12 +278,12 @@ div .post {
 }
 
 /*login,register,creat post button hover*/
- .form .right .right-content button:hover {
+.form .right .right-content button:hover {
     background-color: rgb(218, 93, 191);
 }
 
 /*two buttons same row*/
- .form .right .right-content .button-group {
+.form .right .right-content .button-group {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -258,11 +295,11 @@ div .post {
     background-color: #1680e3;
 }
 
- .form .right .right-content .button-group .button-re:hover {
+.form .right .right-content .button-group .button-re:hover {
     background-color: rgb(83, 198, 226);
 }
 
- .form .right .right-content .form-footer {
+.form .right .right-content .form-footer {
     padding-top: 1rem;
     color: #0c3483;
     font-family: sans-serif;
@@ -271,47 +308,46 @@ div .post {
 
 }
 
- .form .right .right-content .form-footer a {
+.form .right .right-content .form-footer a {
     color: palevioletred;
     font-family: sans-serif;
     font-weight: bold;
     text-decoration: none;
 }
 
- .form .right .right-content .form-footer a:hover {
+.form .right .right-content .form-footer a:hover {
     color: lightpink;
 }
 
 /*styling all check box and related words,policy link */
- .form .right .right-content .checkbox-group {
+.form .right .right-content .checkbox-group {
     font-size: 80%;
     display: flex;
     align-items: center;
-    /* padding-bottom: 10px; */
     padding-top: 22px;
 }
 
- .form .right .right-content .checkbox-group span {
-    color: #0c3483;
-    font-size: medium;
+.form .right .right-content .checkbox-group span {
+    color: #c72427;
+    font-size: 14px;
     font-family: sans-serif;
 }
 
- .form .right .right-content .checkbox-group input[type='checkbox'] {
+.form .right .right-content .checkbox-group input[type='checkbox'] {
     margin-right: 15px;
 
 }
 
- .form .right .right-content .checkbox-group a {
+.form .right .right-content .checkbox-group a {
     color: rgb(38, 0, 255);
 }
 
-.wrap .form .right .right-content .checkbox-group a:hover {
+.form .right .right-content .checkbox-group a:hover {
     color: rgb(116, 211, 214);
 }
 
 /*styling all upload file button and related area*/
- .form .right .right-content input[type=file] {
+.form .right .right-content input[type=file] {
     font-size: 16px;
     color: #68acd3;
     border: 2px solid;
@@ -319,12 +355,12 @@ div .post {
     width: 100%;
 }
 
- .form .right .right-content input[type=file]:hover {
+.form .right .right-content input[type=file]:hover {
     box-shadow: inset 0px 0px 2px rgb(146, 199, 206);
     background: #cfdadf;
 }
 
- .form .right .right-content .file-upload-group {
+.form .right .right-content .file-upload-group {
     border-bottom: none;
     width: 100%;
     padding-top: 0px;
@@ -332,175 +368,174 @@ div .post {
 
 
 /*styling description text area*/
- .form .right .right-content textarea {
+.form .right .right-content textarea {
     border: 2px solid rgb(82, 176, 189);
     padding: 0px;
     width: 90%;
     height: 100px;
     color: black;
     font-family: sans-serif;
-    font-size: 20px;
-    margin:0 atuo;
+    margin: 0 atuo;
 }
 
- .form .right .right-content #select-image {
+.form .right .right-content #select-image {
     text-align: left;
     font-family: sans-serif;
     color: #0c3483;
     margin-top: 0px;
-   padding: 5px 5px;
+    padding: 5px 5px;
 }
-
-
 
 /*************  View Post **************/
-.viewpostbody{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-
 .viewpost-box {
     display: flex;
-    width:80rem;
-    height: 55rem;
-    background: #518ec0;
-    margin:0 auto;
-    border-radius: 20px;
+    background-color: rgb(205 200 231);
     overflow: hidden;
-    box-shadow: 0 25px 45px rgba(14, 13, 13, 0.3);
-   
+    padding: 16px 15px;
 }
-
-.viewpost-box.left {
-    /* width: 500px;
-    height: 600px; */
-   
-
-    /* position: relative; */
-}
-  
 
 .viewpost-box .left img {
-    /* width: 50%;
-    height: 50%;
-    object-fit: cover; */
-    width: 450px;
-    margin-top: 120px;
-    border-radius: 20px;
-
-    /* padding: 100px 20px; */
-    /* background-position: center; */
-    /* border-radius: 50%; */
+    width: 476px;
+    height: 370px;
 }
 
 .viewpost-box .right {
-    width: 64%;
-    height: 75rem;
-    background-color: rgb(236, 233, 227);
-    /* background: rgb(27,36,45);
-background: radial-gradient(circle, rgba(27,36,45,1) 0%, rgba(34,35,103,1) 100%); */
-    /* background: url("/public/image/space.jpg"); */
+    width: 60%;
     display: flex;
-    align-items: center;
     justify-content: center;
     font-family: sans-serif;
-  
-   
-}
-
-.viewpost-box .right .right-content {
-   
-    width: 100%;
-    padding: 48px;;
-    /* display: flex; */
-    flex-direction: column;
-    text-align: center;
-    height: 100%;
+    margin: 1px 1px;
 }
 
 .information {
-
-
-    /* outline:none; */
-
- 
     font-size: 16px;
     font-family: sans-serif;
     color: white;
     font-weight: bold;
-    margin-top: 0.2rem;
-    margin: 20px 25px;
+    background-color: rgb(156 147 202);
+    margin: -5px 0px;
     text-align: left;
-   
-    /* padding-bottom: 0px; */
+    width: 476px;
+    height: 232px;
+    padding: 50px 44px;
 
 }
 
-.image-info{
-    font-size: 17px;
-    font-family: sans-serif;
-    color: rgb(222, 231, 232);
-    height: 55px;
+.description {
+    text-justify: auto;
+    color: rgb(98, 96, 96);
+    text-align: left;
+    padding: 0px 8px;
 }
 
-.center {
-    /* margin: auto;
-    width: 80%; */
-    text-align: center;
-  }
+#post-title,
+#post-author,
+#post-description,
+#post-date {
+    font-size: 16px;
+    color: rgb(25, 25, 112);
+    align-items: center;
+    font-size: 20px;
+    padding: 0px 2px;
+}
 
- textarea{
-    margin-left: 20px;
-    float: left;
-    display: inline-block;
- }
+::placeholder {
+    color: rgb(122, 118, 118);
+    padding: 2px 5px;
+    font-size: 1.3em;
+}
 
- .comment-button{
-    background-color: #d0a523;
+textarea {
+    margin: 7px 6px;
+    border-radius: 5px;
+}
+
+.comment-button {
+    background-color: rgb(73 192 228);
     border: none;
     color: white;
-    padding: 15px 25px;
+    padding: 6px 33px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 15px;
-    margin: 2px 2px;
+    margin: 8px 9px;
     cursor: pointer;
-    border-radius: 10px;
-  }
+    font-weight: 550;
+    border-radius: 5px;
 
-  #comment{
-      float: left;
-  }
-
-  .allcomment{
-    background-color: rgb(235, 232, 232);
-    width: 40rem;
-    height:650px;
-    border: 2px solid rgb(214, 175, 68);
-    padding: 50px;
-    margin: 20px;
-    float: left;
-    border-radius: 15px;
-    overflow: auto;
-    display: flex;
-    flex-direction: column-reverse;
-  }
-/****************** Footer ******************/
-footer {
-    position: fixed;
-    bottom: 5px;
-    width: 100%;
-    height: 80px;
-    text-align: center;
-    font-family: sans-serif;
-    line-height: 6px;
-    font-size: small;
 }
 
-footer p {
-    color: white;
+.comment-button:hover {
+    color: rgb(14, 13, 13);
+    background-color: rgb(166, 231, 255);
+}
+
+.author-text {
+    grid-area: author;
+    justify-self: start;
+    color: rgb(219, 101, 121);
+}
+
+#comment-box {
+    margin: 2px -1px;
+    display: flex;
+    background-color: rgb(60 45 142);
+    border: 9px solid rgb(60 45 142);
+    width: 466px;
+    height: 86px;
+
+}
+
+.comment-text {
+    grid-area: comment;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+    min-height: 45px;
+    float: left;
+}
+
+#messages {
+    background-color: white;
+    grid-area: messages;
+    overflow-y: auto;
+    display: flex;
+    scroll-behavior: smooth;
+    /* box-shadow: -2px 2px 4px 4px #e0e0e0; */
+    /* border-radius: 0.35rem; */
+    flex-flow: column-reverse;
+    /* padding: 40px 25px; */
+    /* border: 1px solid rgb(219, 192, 42); */
+    margin: -1px -1px;
+    width: 465px;
+}
+
+div[id^=message-] {
+    display: grid;
+    grid-template-rows: 0.3fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    font-size: 1rem;
+    grid-template-areas: "author created"
+        "comment comment";
+    text-align: left;
+    padding: 0px 16px;
+}
+
+.date-posted {
+    color: rgb(171, 169, 169);
+}
+
+#comment-container {
+    display: grid;
+    justify-self: stretch;
+    grid-area: comments;
+    grid-template-rows: auto 82px;
+    grid-template-columns: 70%;
+    grid-template-areas: "messages"
+        "comment-box";
+    max-height: 65vh;
+    margin-right: -199px;
+    width: 661px;
+    background-color: rgb(205 200 231);
 }
 
 /********************error message*********************/
@@ -514,7 +549,7 @@ form .error {
 
 .password-requirment {
     display: flex;
-    font-size: small;
+    font-size: 11px;
     font-family: sans-serif;
     color: grey;
 }
@@ -523,12 +558,3 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-/*********************log in error message********************/
-#message {
-    background-color: #f1f1f1;
-    padding: 20px;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 2%;
-    border: 2px solid #420caf;
-}

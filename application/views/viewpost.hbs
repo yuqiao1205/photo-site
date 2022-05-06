@@ -3,27 +3,78 @@
     <div class="left">
       <img id="imagepost" src="/{{currentPost.photopath}}">
       <div class="information">
-        <div class="image-info">Title:&nbsp&nbsp{{currentPost.title}}</div>
-        <div class="image-info">Author Name:&nbsp&nbsp{{currentPost.username}}</div>
-        <div class="image-info">Created Time:&nbsp&nbsp{{currentPost.created}}</div>
-        <div class="image-info">Description:&nbsp&nbsp{{currentPost.description}}</div>
+        <p><span>&nbsp Title:&nbsp&nbsp</span><span id="post-title">{{currentPost.title}}</span></p>
+        <p><span>&nbsp Posted by:&nbsp&nbsp</span><span id="post-author">{{currentPost.username}}</span></p>
+        <p><span>&nbsp Created At:&nbsp&nbsp</span><span style="color:rgb(25,25,112);font-size:20px"
+            class="date-posted">{{currentPost.created}}</span></p>
+        <p><span>&nbsp Description:&nbsp&nbsp</span><span id="post-description">{{currentPost.description}}</span>
+        </p>
       </div>
     </div>
     <div class="right">
-      <div class="right-content">
-          <label id="comment" for="comment"><span>Comment:</span>    </label>
-          <div id="messages"> {{log this}}</div>
-          <textarea id="comment" name="comment" rows="3" cols="60" placeholder="Comment Here" required> </textarea>
-         <button class="comment-button" type="submit">Submit</button>
-     
-        {{!-- <div class="button-group"><br><br> --}}
-     
-        {{!-- </div> --}}
-        <div class="allcomment"> <p>old comment will display here</p>
-       
+      <div id="comment-container">
+        <div id="messages">
+          {{#each currentPost.comment}}
+          {{>comment this}}
+          {{/each}}
         </div>
-
+        <div id="comment-box">
+          <textarea id="comment-box-text" name="commmentbox" rows="1" cols="50"
+            placeholder="Enter Comment Here"></textarea>
+          <button id='comment-box-button' class="comment-button">Submit</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+
+    document.querySelectorAll('span[class=date-posted]').forEach((postedData) => {
+      postedData.textContent = new Date(postedData.textContent).toLocaleDateString();
+    });
+
+    function addMessage(data) {
+      let template = document.createElement('template');
+      template.innerHTML = `<div id="message-">
+       <strong class="author-text">@${data.username}</strong>
+       <span class="date-posted">${new Date().toLocaleDateString()}</span>
+       <div class="comment-text">${data.comment} </div>
+     </div>`;
+
+      document.getElementById('messages').firstChild.before(template.content.firstChild);
+    };
+
+    document.getElementById('comment-box-button').onclick = (event) => {
+
+      let commentText = document.getElementById('comment-box-text').value;
+      let postId = document.location.pathname.match(/\d+/g).map(Number)[0];
+
+      if (!commentText) {
+        return;
+      }
+
+      let fetchOptions = {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          comment: commentText,
+          postId,
+          postId
+        })
+      }
+
+      fetch('/comments/create', fetchOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.code == 1) {
+            addMessage(data);
+          }
+          document.addFlashFromFrontEnd(data.message, data.status);
+        })
+        .catch(err => console.log(err));
+    };
+  });
+</script>

@@ -1,46 +1,33 @@
 var express = require('express');
 var router = express.Router();
-var db = require("../config/database");
 var printers = require('../helpers/debug/debugprinters')
 var UserError = require('../helpers/error/UserError')
-var bcrypt = require('bcrypt')
 
-const bodyParser = require('body-parser')
+const UserModel = require('../models/Users');
+
 const {
   check,
   validationResult
 } = require('express-validator');
-const {
-  restart
-} = require('nodemon');
 
-const urlencodedParser = bodyParser.urlencoded({
-  extended: false
-})
-
-/* GET users listing. */
-// router.get('/', function (req, res, next) {
-//   res.send('respond with a resource');
-// });
-
-/* register server side validation*/
+// register server side validation
 router.post('/register',
-  check('username', 'This username must be 3+ characters long').exists().isLength({
+  check('username', 'This username must be 3+ characters long').isLength({
     min: 3,
     max: 8
   }),
-  check('username').matches(/^[a-z]/i).withMessage("must begin with character"),
-  check('username').matches(/^[a-z0-9]+$/i).withMessage("only alphanumeric characters"),
-  check('email', 'Email is not valid').isEmail().normalizeEmail(),
-  check('password', 'Password is not valid').exists().isLength({
+  check('username').matches(/^[a-z]/i).withMessage("Username must  begin with character"),
+  check('username').matches(/^[a-z0-9]+$/i).withMessage("Username should contain only alphanumeric characters"),
+  check('email').isEmail().normalizeEmail().withMessage("Email is not valid"),
+  check('password').isLength({
     min: 8,
     max: 15
-  }),
+  }).withMessage('Password must be at least 8 characters and less than 15 characters'),
   check('password').isStrongPassword({
     minUppercase: 1,
-    minNumbers: 1
-  }),
-  check('password').matches(/[/*-+!@#$^&*]/),
+    minNumbers: 1,
+  }).withMessage('Password must be contain at least 1 uppercase and 1 number'),
+  check('password').matches(/[/*-+!@#$^&*]/).withMessage('Password must contain at least 1 special character'),
   check('cpassword', 'Password not match').exists().custom((value, {
     req
   }) => value === req.body.password),
@@ -49,157 +36,162 @@ router.post('/register',
 
     if (!errors.isEmpty()) {
       const errorFormatter = ({
-        msg,
-        param
+        msg
       }) => {
-        return `Error: ${param} ${msg}`;
+        return `Error: ${msg}`;
       };
 
-      // TODO: Show detail server-side validation errors
-      const errorsArray = errors.formatWith(errorFormatter);
+      const errorsResult = errors.formatWith(errorFormatter);
 
-      // console.log("Error: " + errors);
-      // req.flash('error', "Validation errors found!");
+      let errorMessage = '';
+      for (const error of errorsResult.errors) {
+        errorMessage += error.msg + ' / ';
+      }
+
+      req.flash('error', errorMessage);
       res.status(200);
-      res.redirect("/registration");
-
+      req.session.save(function (err) {
+        res.redirect('/registration');
+      });
       return;
-
-      // throw new UserError(
-      //   "Validation failed!  " + errors,
-      //   "/login",
-      //   200
-      // );
     };
-
-    console.log(req.body);
 
     let username = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
-    let cpassword = req.body.cpassword;
 
-    db.execute("SELECT * FROM user WHERE username=?", [username])
-      .then(([results, fields]) => {
-        if (results && results.length == 0) {
-          return db.execute("SELECT * FROM user WHERE email=?", [email]);
-        } else {
+    UserModel.usernameExists(username)
+      .then((userDoesNameExist) => {
+        if (userDoesNameExist) {
           throw new UserError(
             "Registration Faild: Username already exists",
-            "/login",
+            "/registration",
             200
           );
+        } else {
+          return UserModel.emailExists(email);
         }
       })
-      .then(([results, fields]) => {
-        if (results && results.length == 0) {
-          return bcrypt.hash(password, 15)
-
-        } else {
+      .then((emailDoesExist) => {
+        if (emailDoesExist) {
           throw new UserError(
             "Registration Faild: Email already exists",
             "/registration",
             200
           );
+        } else {
+          return UserModel.create(username, password, email);
         }
       })
-
-      .then((hashedPassword) => {
-
-        let baseSQL = "INSERT INTO user (username,email,password,created) VALUES (?,?,?,now());"
-        return db.execute(baseSQL, [username, email, hashedPassword])
-
-      })
-      .then(([results, field]) => {
-        if (results && results.affectedRows) {
-          printers.successPrint("User.js -> User was created");
-          req.flash('success', 'User account has been made');
-          res.redirect('/login');
-        } else {
+      .then((createdUserId) => {
+        if (createdUserId < 0) {
           throw new UserError(
-            "Server Error,user could not becreated",
+            "Server Error,user could not be created",
             "/registration",
             500
           );
+        } else {
+          printers.successPrint("User.js -> User was created");
+          req.flash('success', 'User account has been made, please login now');
+          req.session.save(function (err) {
+            res.redirect('/login');
+          })
         }
       })
       .catch((err) => {
-        printers.errorPrint("Cannot register user due to error!" + err);
+        printers.errorPrint("User could not made " + err);
 
         if (err instanceof UserError) {
           printers.errorPrint(err.getMessage());
-
           req.flash('error', err.getMessage())
           res.status(err.getStatus());
-          res.redirect(err.getRedirectURL());
+          req.session.save(function (err) {
+            res.redirect('/registration');
+          });
         } else {
           next(err);
         }
-
       });
   });
 
-router.post('/login', (req, res, next) => {
+// login server side validation
+router.post('/login',
+  check('username', 'This username must be 3+ characters long').isLength({
+    min: 3,
+    max: 8
+  }),
+  check('username').matches(/^[a-z]/i).withMessage("Username must  begin with character"),
+  check('username').matches(/^[a-z0-9]+$/i).withMessage("Username should contain only alphanumeric characters"),
+  check('password').isLength({
+    min: 8,
+    max: 15
+  }).withMessage('Password must be at least 8 characters and less than 15 characters'),
+  check('password').isStrongPassword({
+    minUppercase: 1,
+    minNumbers: 1,
+  }).withMessage('Password must be contain at least 1 uppercase and 1 number'),
+  check('password').matches(/[/*-+!@#$^&*]/).withMessage('Password must contain at least 1 special character'),
+  (req, res, next) => {
 
-  let username = req.body.username;
-  let password = req.body.password;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorFormatter = ({
+        msg
+      }) => {
+        return `Error: ${msg}`;
+      };
 
-  /**do server side validation */
+      const errorsResult = errors.formatWith(errorFormatter);
 
-  let baseSQL = "SELECT id, username, password FROM user WHERE username=?;"
-  let userId;
-  db.execute(baseSQL, [username])
-    .then(([results, field]) => {
-      if (results && results.length == 1) {
-        let hashedPassword = results[0].password;
-        userId = results[0].id;
-
-        return bcrypt.compare(password, hashedPassword)
-
-      } else {
-        throw new UserError("invalid username and/or password", "/login", 200);
+      let errorMessage = '';
+      for (const error of errorsResult.errors) {
+        errorMessage += error.msg + ' / ';
       }
-    })
-    .then((passwordsMatched) => {
-      if (passwordsMatched) {
-        printers.successPrint(`User ${username}/${userId} is logged in`);
 
-        req.session.username = username;
-        req.session.userid = userId;
-        res.locals.logged = true;
-        req.flash('success','You have been successfully Logged in!');
-        req.session.save(function (err) {
+      req.flash('error', errorMessage);
+      res.status(200);
+      req.session.save(function (err) {
+        res.redirect('/login');
+      });
+      return;
+    };
 
-          res.redirect('/');
-        });
+    let username = req.body.username;
+    let password = req.body.password;
 
-        // res.render('index', {
-        //   title: "Index",
-        //   logged: true
-        // });
-      } else {
+    UserModel.authenticate(username, password)
+      .then((loggedUserId) => {
+        console.log(loggedUserId);
+        if (loggedUserId > 0) {
+          printers.successPrint(`User ${username} is logged in`);
 
-        throw new UserError("Invalid username and/or password", "/login", 200);
-      }
-    })
-    .catch((err) => {
-      printers.errorPrint("user login failed");
+          req.session.username = username;
+          req.session.userId = loggedUserId;
+          res.locals.logged = true;
+          req.flash('success', 'Welcome, you have been successfully logged in!');
+          req.session.save(function (err) {
+            res.redirect('/');
+          });
+        } else {
+          printers.errorPrint("No user record found!");
+          throw new UserError("Invalid username and/or password!", "/login", 200);
+        }
+      })
+      .catch((err) => {
+        printers.errorPrint("User login failure, err=" + JSON.stringify(err));
 
-      if (err instanceof UserError) {
-        printers.errorPrint(err.getMessage());
+        if (err instanceof UserError) {
 
-        // req.flash('error', 'Invalid username and/or password');
-        res.status(err.getStatus());
-        // res.redirect('/login')
-        res.render('login', {
-          title: 'login',
-          errors: "username and/or password not exist,try again",
-          username: username
-        });
-      } else {
-        next(err);
-      }
-    });
-});
+          res.status(err.getStatus());
+
+          req.flash('error', err.getMessage());
+          req.session.save(function (err) {
+            res.redirect("/login");
+          });
+        } else {
+          next(err);
+        }
+      });
+  });
 
 module.exports = router;
