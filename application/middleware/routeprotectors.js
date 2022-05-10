@@ -13,5 +13,4 @@ routerProtectors.userIsLoggedIn = function (req, res, next) {
         });
     }
 }
-
 module.exports = routerProtectors;

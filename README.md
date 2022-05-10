@@ -20,7 +20,13 @@ Please follow the instructions below and fill in the information requested when 
 # Build/Run Instructions
 
 ## Build Instructions
-1. npm install
+1. In terminal, type cd application
+2. Type npm install
+3. Change the name of database: 'csc317' in database.js to your database name
+4. The source of database(csc317.sql) under config folder, copy/paste the whole source into your database to create related tables
 
 ## Run Instructions
-1. npm start
+1. Make sure under application directory
+2. Type npm start
+3. Choose a browser to run the application
+4. Type "localhost:3000" into the URL

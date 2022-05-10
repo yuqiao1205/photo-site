@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         innerFlashDiv.setAttribute('class', 'alert alert-info');
     
         parentNode.appendChild(flashMessageDiv);
-        setFlashMessageFadeOut(flashMessageDiv);
+        setFlashMessageFadeOut(flashMessageDiv);  
     }
     document.addFlashFromFrontEnd = addFlashFromFrontEnd;
 

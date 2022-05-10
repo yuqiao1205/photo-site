@@ -11,27 +11,54 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-#flash-message {
+.alert{
+    width: 1000px;
+    height: 30px;
+    text-align: center;
+}
+
+.alert-danger {
     color: rgb(255, 0, 79);
+    background-color: rgb(243, 230, 230);
+    width: 1000px;
+    height: 30px;
+    text-align: center;
+   
+}
+
+.alert-success {
+    color: rgb(21, 111, 45);
+    background-color: rgb(184, 232, 197);
+    width: 1000px;
+    height: 30px;
+    text-align: center;
+}
+
+#flash-message {
     text-align: center;
     margin: 20px auto;
     font-size: 20px;
-    /* border: 1px solid rgb(233, 108, 116); */
     width: 1000px;
     height: 30px;
-    background-color: rgb(255, 250, 250);
     font-family: sans-serif;
-
 }
 
 #flash-message div {
     text-align: center;
 }
 
-.alert-login {
+.alert-info{
+    color: rgb(255, 0, 79);
+    background-color: rgb(243, 230, 230);
+    width: 1000px;
+    height: 30px;
+    text-align: center;
+}
+
+ .alert-login {
     text-align: center;
     position: fixed;
-    width: 100%;
+    width: 100%; 
 }
 
 .searchbar {
@@ -44,7 +71,6 @@ body::-webkit-scrollbar {
     margin-top: 8px;
     font-size: 17px;
     border: none;
-
     border: 1px solid #ccc;
 }
 
@@ -70,8 +96,6 @@ body::-webkit-scrollbar {
 }
 
 .container-box {
-
-    /* background-image: url(/public/image/fuji.jpg); */
     background-image: url(/public/image/cartoon.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -132,13 +156,6 @@ div .post {
     background-color: rgb(255, 219, 88);
 }
 
-/* .card-text {
-    font-family: sans-serif;
-    color: rgb(39, 36, 36);
-    font-size: 18px;
-    text-align: center;
-} */
-
 /****************Form****************/
 @keyframes birdbanner {
     from {
@@ -188,7 +205,6 @@ div .post {
 }
 
 .form .right {
-
     width: 565px;
     height: 640px;
     background: white;
@@ -196,7 +212,6 @@ div .post {
     align-items: center;
     justify-content: center;
     font-family: sans-serif;
-
 }
 
 .form .right .right-content {
@@ -305,7 +320,6 @@ div .post {
     font-family: sans-serif;
     text-align: center;
     font-size: 16px;
-
 }
 
 .form .right .right-content .form-footer a {
@@ -482,7 +496,6 @@ textarea {
     border: 9px solid rgb(60 45 142);
     width: 466px;
     height: 86px;
-
 }
 
 .comment-text {
@@ -500,11 +513,7 @@ textarea {
     overflow-y: auto;
     display: flex;
     scroll-behavior: smooth;
-    /* box-shadow: -2px 2px 4px 4px #e0e0e0; */
-    /* border-radius: 0.35rem; */
     flex-flow: column-reverse;
-    /* padding: 40px 25px; */
-    /* border: 1px solid rgb(219, 192, 42); */
     margin: -1px -1px;
     width: 465px;
 }
@@ -557,4 +566,3 @@ form .error {
 body::-webkit-scrollbar {
     display: none;
 }
-

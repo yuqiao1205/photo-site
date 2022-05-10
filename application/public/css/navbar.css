@@ -16,13 +16,13 @@
 
  /* Styling all the elements in nav as a whole */
  nav {
-
+ 
      background-color:rgb(255,255,255);
      display: flex;
      flex-wrap: wrap;
      align-items: center;
      justify-content: space-between;
-     height: 65px;
+     height: 70px;
      padding: 0 100px;
  }
 
@@ -46,21 +46,12 @@
      display: flex;
      flex: 1;
      padding: 0 0 0 170px;
-   
-     /* border: 1px solid rgb(72, 191, 218);
-     width:250px;
-     height: 34px; */
  }
 
  /* Styling the list items in the nav tag */
  nav .nav-items li {
      list-style: none;
      padding: 0 10px;
-     /* border: 1px solid rgb(72, 191, 218);
-     border-radius: 15px;
-     background-color: rgb(0,147,175); */
-     
-     
  }
 
  /* Styling each list items */
@@ -103,8 +94,6 @@
      
 }
      
-
-
  #search-button {
          padding: 10px 18px;
           background-color:rgb(69,177,232);

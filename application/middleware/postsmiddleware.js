@@ -3,7 +3,7 @@ const postMiddleware = {};
 const db = require("../config/database");
 
 const PostModel = require('../models/Posts');
-const CommentsModel = require('../models/comments');
+const CommentsModel = require('../models/Comments');
 
 postMiddleware.getRecentPosts = async function (req, res, next) {
     try {

@@ -6,7 +6,7 @@ const {
 } = require('../helpers/debug/debugprinters');
 const {
     create
-} = require("../models/comments");
+} = require("../models/Comments");
 
 router.post('/create', (req, res, next) => {
           
@@ -15,7 +15,7 @@ router.post('/create', (req, res, next) => {
                 res.json({
                     code: -1,
                     status: 'danger',
-                    message: 'Must be logged in to create a comment'
+                    message: 'You must be logged in to create a comment'
                 });
             } else {
                 let {
