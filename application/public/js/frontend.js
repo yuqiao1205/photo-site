@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
             location.replace('/');
             return;
         }
-        let mainContent = document.getElementsByClassName('container')[0];
+        let mainContent = document.getElementById('content');
+        mainContent.className = 'container';
+
         let searchURL = `/posts/search?search=${searchTerm}`;
         fetch(searchURL)
             .then((data) => {
@@ -67,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createCard(postData) {
         return `<div id="post-${postData.id}" class="post">
-        <img class="pic" src="${postData.thumbnail}" alt="Missing Image">
+        <img class="pic" src="/${postData.thumbnail}" alt="Missing Image">
         <div class="title"><strong><p>${postData.title}</p></strong></div>
         <div class="description"><p>${postData.description}</p></div>
         <button id="postdetails" onclick="location.href='/post/${postData.id}'" type="button">

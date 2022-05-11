@@ -1,27 +1,29 @@
-<div class="center">
-  <div class="viewpost-box">
-    <div class="left">
-      <img id="imagepost" src="/{{currentPost.photopath}}">
-      <div class="information">
-        <p><span>&nbsp Title:&nbsp&nbsp</span><span id="post-title">{{currentPost.title}}</span></p>
-        <p><span>&nbsp Posted by:&nbsp&nbsp</span><span id="post-author">{{currentPost.username}}</span></p>
-        <p><span>&nbsp Created At:&nbsp&nbsp</span><span style="color:rgb(25,25,112);font-size:20px"
-            class="date-posted">{{currentPost.created}}</span></p>
-        <p><span>&nbsp Description:&nbsp&nbsp</span><span id="post-description">{{currentPost.description}}</span>
-        </p>
-      </div>
-    </div>
-    <div class="right">
-      <div id="comment-container">
-        <div id="messages">
-          {{#each currentPost.comment}}
-          {{>comment this}}
-          {{/each}}
+<div id="content">
+  <div class="center">
+    <div class="viewpost-box">
+      <div class="left">
+        <img id="imagepost" src="/{{currentPost.photopath}}">
+        <div class="information">
+          <p><span>&nbsp Title:&nbsp&nbsp</span><span id="post-title">{{currentPost.title}}</span></p>
+          <p><span>&nbsp Posted by:&nbsp&nbsp</span><span id="post-author">{{currentPost.username}}</span></p>
+          <p><span>&nbsp Created At:&nbsp&nbsp</span><span style="color:rgb(25,25,112);font-size:20px"
+              class="date-posted">{{currentPost.created}}</span></p>
+          <p><span>&nbsp Description:&nbsp&nbsp</span><span id="post-description">{{currentPost.description}}</span>
+          </p>
         </div>
-        <div id="comment-box">
-          <textarea id="comment-box-text" name="commmentbox" rows="1" cols="50"
-            placeholder="Enter Comment Here"></textarea>
-          <button id='comment-box-button' class="comment-button">Submit</button>
+      </div>
+      <div class="right">
+        <div id="comment-container">
+          <div id="messages">
+            {{#each currentPost.comment}}
+            {{>comment this}}
+            {{/each}}
+          </div>
+          <div id="comment-box">
+            <textarea id="comment-box-text" name="commmentbox" rows="1" cols="50"
+              placeholder="Enter Comment Here"></textarea>
+            <button id='comment-box-button' class="comment-button">Submit</button>
+          </div>
         </div>
       </div>
     </div>
