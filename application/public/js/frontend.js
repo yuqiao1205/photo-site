@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         flashMessageDiv.appendChild(innerFlashDiv);
         flashMessageDiv.setAttribute('id', 'flash-message');
         innerFlashDiv.setAttribute('class', 'alert alert-info');
-    
+
         parentNode.appendChild(flashMessageDiv);
-        setFlashMessageFadeOut(flashMessageDiv);  
+        setFlashMessageFadeOut(flashMessageDiv);
     }
     document.addFlashFromFrontEnd = addFlashFromFrontEnd;
 
@@ -74,9 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="description"><p>${postData.description}</p></div>
         <button id="postdetails" onclick="location.href='/post/${postData.id}'" type="button">
              More</button>
-            
     </div> `;
     }
 
 });
-

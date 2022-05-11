@@ -24,7 +24,7 @@ PostModel.search = (searchTerm) => {
 }
 
 PostModel.getRecentPosts = (numberOfPost) => {
-    let baseSQL = 'SELECT id,title,description,thumbnail,created FROM posts ORDER BY created DESC LIMIT 5';
+    let baseSQL = 'SELECT id,title,description,thumbnail,created FROM posts ORDER BY created DESC LIMIT 6';
     return db.execute(baseSQL, [numberOfPost])
         .then(([results, fields]) => {
             return Promise.resolve(results);

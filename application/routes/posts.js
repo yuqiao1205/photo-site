@@ -143,9 +143,9 @@ router.get('/search', async (req, res, next) => {
                                 results: results
                             });
                         } else {
-                            let results = await PostModel.getRecentPosts(5);
+                            let results = await PostModel.getRecentPosts(6);
                             res.send({
-                                message: "No results found, but here are the 5 most recent posts",
+                                message: "No results found, but here are the 6 most recent posts",
                                 results: results
                             });
                         }

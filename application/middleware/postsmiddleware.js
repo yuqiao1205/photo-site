@@ -7,7 +7,7 @@ const CommentsModel = require('../models/Comments');
 
 postMiddleware.getRecentPosts = async function (req, res, next) {
     try {
-        let results = await PostModel.getRecentPosts(5);
+        let results = await PostModel.getRecentPosts(6);
         res.locals.results = results;
         if (results && results.length == 0) {
             req.flash('error', 'There are no post created yet');
